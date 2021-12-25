@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string>
-#include <vector>
-#include <map>
+#include <set>
 
 bool IsPalindrome(std::string str)
 {
@@ -16,11 +15,11 @@ bool IsPalindrome(std::string str)
     return true;
 }
 
-void FindAllPalindromes(std::map<std::string, int>& output, std::string input)
+void FindAllPalindromes(std::set<std::string>& output, std::string input)
 {
     if(output.find(input) == output.end() && IsPalindrome(input))
     {
-        output[input] = 1;
+        output.insert(input);
     }
 
     if(input.length() == 1)
@@ -34,11 +33,11 @@ void FindAllPalindromes(std::map<std::string, int>& output, std::string input)
 
 int main()
 {
-    std::map<std::string, int> palindromes;
+    std::set<std::string> palindromes;
     FindAllPalindromes(palindromes, "asfsa");
 
-    for(std::map<std::string,int>::iterator iter = palindromes.begin(); iter != palindromes.end(); ++iter)
+    for(std::set<std::string>::iterator iter = palindromes.begin(); iter != palindromes.end(); ++iter)
     {
-        printf("%s\n", iter->first.c_str());
+        printf("%s\n", iter->c_str());
     }
 }
